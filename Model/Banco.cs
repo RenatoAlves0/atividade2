@@ -7,7 +7,9 @@ namespace Atividade1
 {
     public class Banco
     {
-         
+
+        private int idBanco;
+
         List<Agencia> agencias = new List<Agencia>();
 
         public void AdicionarAgencia(Agencia a)
@@ -18,7 +20,10 @@ namespace Atividade1
         }
 
         [Key]
-        public int IdBanco { get; set; }
+        public int IdBanco {
+            get {return idBanco; }
+            set { idBanco = value; }
+        }
 
         public List<Agencia> Agencias { get; }
 

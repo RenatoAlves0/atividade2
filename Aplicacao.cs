@@ -7,13 +7,13 @@ namespace Atividade1
     {
         public const decimal Juros = 0.6M;
 
-        int sum = 0;
-        int id_contaCorrente = 0;
-        int id_contaPoupanca = 0;
+        
 
         static void Main(string[] args)
         {
-            
+            int sum = 1;
+            int id_contaCorrente = 1;
+            int id_contaPoupanca = 1;
 
             using (var dbcontext = new StoreContext())
             {
@@ -33,9 +33,7 @@ namespace Atividade1
                 dbcontext.Bancos.Add(bb);
                 dbcontext.SaveChanges();
 
-                int sum = 0;
-                int id_contaCorrente = 0;
-                int id_contaPoupanca = 0;
+                
 
                 while (true)
                 {

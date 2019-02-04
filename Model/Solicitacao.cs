@@ -7,6 +7,7 @@ namespace Atividade1
 {
     public class Solicitacao
     {
+        private int idSoliciacao;
         public void realizarSolicitacao(Banco banco)
         {
             Console.WriteLine("Digite o Id da agência: ");
@@ -103,7 +104,10 @@ namespace Atividade1
 
 
         [Key]
-        public int IdSolicitacao { get; set; }
+        public int IdSolicitacao {
+            get { return idSoliciacao; }
+            set { idSoliciacao = value; }
+        }
 
     }
 }

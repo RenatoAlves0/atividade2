@@ -8,6 +8,8 @@ namespace Atividade1
     public class Agencia
     {
 
+        private int idAgencia;
+
         List<ContaCorrente> contas_corrente = new List<ContaCorrente>();
         List<ContaPoupanca> contas_poupanca = new List<ContaPoupanca>();
         List<Solicitacao> solicitacoes = new List<Solicitacao>();
@@ -61,7 +63,10 @@ namespace Atividade1
 
 
         [Key]
-        public int IdAgencia { get; set; }
+        public int IdAgencia {
+            get { return idAgencia; }
+            set { idAgencia = value; }
+        }
 
         public List<ContaCorrente> ContaCorrentes { get; set; }
         public List<ContaPoupanca> ContaPoupancas { get; set; }

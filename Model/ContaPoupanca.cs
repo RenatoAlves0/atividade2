@@ -7,7 +7,7 @@ namespace Atividade1
 {
     public class ContaPoupanca
     {
-
+        private int idContaPoupanca;
         private decimal taxaJuros;
         private DateTime dataAniversario;
         private string titular = string.Empty;
@@ -39,7 +39,8 @@ namespace Atividade1
         [Key]
         public int Id
         {
-            get; set;
+            get { return idContaPoupanca; }
+            set { idContaPoupanca = value; }
         }
 
         public void Depositar(decimal valor)

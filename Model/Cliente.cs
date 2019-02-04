@@ -7,10 +7,14 @@ namespace Atividade1
 {
     public class Cliente
     {
+        private int idCliente;
         public string Nome { get; set; }
 
         [Key]
-        public int IdCliente { get; set; }
+        public int IdCliente {
+            get { return idCliente; }
+            set { idCliente = value; }
+        }
     }
 
     

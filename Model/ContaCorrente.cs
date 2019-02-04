@@ -9,7 +9,7 @@ namespace Atividade1
     {
         public const decimal Taxa = 0.10M;
         public string titular = string.Empty;
-
+        private int idContaCorrente;
         public ContaCorrente()
         {
 
@@ -23,7 +23,8 @@ namespace Atividade1
         [Key]
         public int Id
         {
-            get; set;
+            get {return idContaCorrente; }
+            set { idContaCorrente = value; }
         }
 
         public void Depositar(decimal valor)
