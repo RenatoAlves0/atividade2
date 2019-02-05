@@ -1,13 +1,14 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Atividade1
 {
     public class Solicitacao
     {
-        private int idSoliciacao;
+        
         public void realizarSolicitacao(Banco banco)
         {
             Console.WriteLine("Digite o Id da agência: ");
@@ -19,7 +20,7 @@ namespace Atividade1
             if (tipo_conta == 1)
             {
 
-                Agencia agencia = banco.buscaAgencia(numAgencia);
+                Agencia agencia = Aplicacao.buscaAgencia(numAgencia);
                 if (agencia == null)
                 {
                     return;
@@ -28,7 +29,7 @@ namespace Atividade1
                 Console.WriteLine("Digite o numero da conta: ");
                 int num_conta = int.Parse(Console.ReadLine());
 
-                ContaCorrente cc = agencia.getCCorrente(num_conta);
+                ContaCorrente cc = Aplicacao.buscaContaCorrente(num_conta);
                 if (cc == null)
                 {
                     return;
@@ -48,28 +49,44 @@ namespace Atividade1
                 }
                 else if (operacao == 2)
                 {
-                    Console.WriteLine("SAQUE");
-                    Console.WriteLine("Digite o valor para saque: ");
-                    cc.Sacar(decimal.Parse(Console.ReadLine()));
-
+                    //Console.WriteLine("SAQUE");
+                    //Console.WriteLine("Digite o valor para saque: ");
+                    //cc.Sacar(decimal.Parse(Console.ReadLine()));
+                    using (var db = new StoreContext())
+                    {
+                        Console.WriteLine("SAQUE");
+                        Console.WriteLine("Digite o valor para saque: ");
+                        var founded = db.Set<ContaCorrente>().First(c => c.Id == cc.Id);
+                        founded.Sacar(decimal.Parse(Console.ReadLine()));
+                        db.SaveChanges();
+                    }
                 }
                 else if (operacao == 3)
                 {
-                    Console.WriteLine("DEPÓSITO");
-                    Console.WriteLine("Digite o valor para depositar: ");
-                    cc.Depositar(decimal.Parse(Console.ReadLine()));
+                    //Console.WriteLine("DEPÓSITO");
+                    //Console.WriteLine("Digite o valor para depositar: ");
+                    //cc.Depositar(decimal.Parse(Console.ReadLine()));
+                    using (var db = new StoreContext())
+                    {
+                        Console.WriteLine("DEPÓSITO");
+                        Console.WriteLine("Digite o valor para depositar: ");
+                        var founded = db.Set<ContaCorrente>().First(c => c.Id == cc.Id);
+                        founded.Depositar(decimal.Parse(Console.ReadLine()));
+                        db.SaveChanges();
+                    }
+
                 }
             }
             else if (tipo_conta == 2)
             {
                 Console.WriteLine("Digite o numero da conta: ");
                 int num_conta = int.Parse(Console.ReadLine());
-                Agencia agencia = banco.buscaAgencia(numAgencia);
+                Agencia agencia = Aplicacao.buscaAgencia(numAgencia);
                 if (agencia == null)
                 {
                     return;
                 }
-                ContaPoupanca cp = agencia.getCPoupanca(num_conta);
+                ContaPoupanca cp = Aplicacao.buscaContaPoupanca(num_conta);
                 if (cp == null)
                 {
                     return;
@@ -89,25 +106,44 @@ namespace Atividade1
                 }
                 else if (operacao == 2)
                 {
-                    Console.WriteLine("SAQUE");
-                    Console.WriteLine("Digite o valor para saque: ");
-                    cp.Sacar(decimal.Parse(Console.ReadLine()));
+                    //Console.WriteLine("SAQUE");
+                    //Console.WriteLine("Digite o valor para saque: ");
+                    //cp.Sacar(decimal.Parse(Console.ReadLine()));
+
+                    using (var db = new StoreContext())
+                    {
+                        Console.WriteLine("SAQUE");
+                        Console.WriteLine("Digite o valor para saque: ");
+                        var founded = db.Set<ContaPoupanca>().First(p => p.Id == cp.Id);
+                        founded.Sacar(decimal.Parse(Console.ReadLine()));
+                        db.SaveChanges();
+                    }
                 }
                 else if (operacao == 3)
                 {
-                    Console.WriteLine("DEPÓSITO");
-                    Console.WriteLine("Digite o valor para depositar: ");
-                    cp.Depositar(decimal.Parse(Console.ReadLine()));
+                    //Console.WriteLine("DEPÓSITO");
+                    //Console.WriteLine("Digite o valor para depositar: ");
+                    //cp.Depositar(decimal.Parse(Console.ReadLine()));
+
+                    using (var db = new StoreContext())
+                    {
+                        Console.WriteLine("DEPÓSITO");
+                        Console.WriteLine("Digite o valor para depositar: ");
+                        var founded = db.Set<ContaPoupanca>().First(p => p.Id == cp.Id);
+                        founded.Depositar(decimal.Parse(Console.ReadLine()));
+                        db.SaveChanges();
+                    }
+
+
+
+
                 }
             }
         }
 
 
         [Key]
-        public int IdSolicitacao {
-            get { return idSoliciacao; }
-            set { idSoliciacao = value; }
-        }
+        public int Id { get; set; }
 
     }
 }

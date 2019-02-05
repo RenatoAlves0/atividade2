@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Atividade1.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20190204190531_InitialCreate")]
+    [Migration("20190205182957_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,36 +20,36 @@ namespace Atividade1.Migrations
 
             modelBuilder.Entity("Atividade1.Agencia", b =>
                 {
-                    b.Property<int>("IdAgencia")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BancoIdBanco");
+                    b.Property<int?>("BancoId");
 
-                    b.HasKey("IdAgencia");
+                    b.HasKey("Id");
 
-                    b.HasIndex("BancoIdBanco");
+                    b.HasIndex("BancoId");
 
                     b.ToTable("Agencias");
                 });
 
             modelBuilder.Entity("Atividade1.Banco", b =>
                 {
-                    b.Property<int>("IdBanco")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.HasKey("IdBanco");
+                    b.HasKey("Id");
 
                     b.ToTable("Bancos");
                 });
 
             modelBuilder.Entity("Atividade1.Cliente", b =>
                 {
-                    b.Property<int>("IdCliente")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Nome");
 
-                    b.HasKey("IdCliente");
+                    b.HasKey("Id");
 
                     b.ToTable("Clientes");
                 });
@@ -59,7 +59,7 @@ namespace Atividade1.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AgenciaIdAgencia");
+                    b.Property<int?>("AgenciaId");
 
                     b.Property<decimal>("Saldo");
 
@@ -67,7 +67,7 @@ namespace Atividade1.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgenciaIdAgencia");
+                    b.HasIndex("AgenciaId");
 
                     b.ToTable("ContasCorrentes");
                 });
@@ -77,7 +77,7 @@ namespace Atividade1.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AgenciaIdAgencia");
+                    b.Property<int?>("AgenciaId");
 
                     b.Property<DateTime>("DataAniversario");
 
@@ -89,21 +89,21 @@ namespace Atividade1.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgenciaIdAgencia");
+                    b.HasIndex("AgenciaId");
 
                     b.ToTable("ContasPoupanca");
                 });
 
             modelBuilder.Entity("Atividade1.Solicitacao", b =>
                 {
-                    b.Property<int>("IdSolicitacao")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AgenciaIdAgencia");
+                    b.Property<int?>("AgenciaId");
 
-                    b.HasKey("IdSolicitacao");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AgenciaIdAgencia");
+                    b.HasIndex("AgenciaId");
 
                     b.ToTable("Solicitacoes");
                 });
@@ -112,28 +112,28 @@ namespace Atividade1.Migrations
                 {
                     b.HasOne("Atividade1.Banco")
                         .WithMany("Agencias")
-                        .HasForeignKey("BancoIdBanco");
+                        .HasForeignKey("BancoId");
                 });
 
             modelBuilder.Entity("Atividade1.ContaCorrente", b =>
                 {
-                    b.HasOne("Atividade1.Agencia")
+                    b.HasOne("Atividade1.Agencia", "Agencia")
                         .WithMany("ContaCorrentes")
-                        .HasForeignKey("AgenciaIdAgencia");
+                        .HasForeignKey("AgenciaId");
                 });
 
             modelBuilder.Entity("Atividade1.ContaPoupanca", b =>
                 {
                     b.HasOne("Atividade1.Agencia")
                         .WithMany("ContaPoupancas")
-                        .HasForeignKey("AgenciaIdAgencia");
+                        .HasForeignKey("AgenciaId");
                 });
 
             modelBuilder.Entity("Atividade1.Solicitacao", b =>
                 {
                     b.HasOne("Atividade1.Agencia")
                         .WithMany("Solicitacoes")
-                        .HasForeignKey("AgenciaIdAgencia");
+                        .HasForeignKey("AgenciaId");
                 });
 #pragma warning restore 612, 618
         }

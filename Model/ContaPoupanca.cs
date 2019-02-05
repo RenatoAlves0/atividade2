@@ -7,10 +7,11 @@ namespace Atividade1
 {
     public class ContaPoupanca
     {
-        private int idContaPoupanca;
+        
         private decimal taxaJuros;
         private DateTime dataAniversario;
-        private string titular = string.Empty;
+        
+
 
         public ContaPoupanca()
         {
@@ -19,7 +20,7 @@ namespace Atividade1
 
         public ContaPoupanca(decimal j, DateTime d, string t)
         {
-            this.titular = t;
+            Titular = t;
             taxaJuros = j;
             dataAniversario = d;
         }
@@ -37,11 +38,8 @@ namespace Atividade1
             }
         }
         [Key]
-        public int Id
-        {
-            get { return idContaPoupanca; }
-            set { idContaPoupanca = value; }
-        }
+        public int Id { get; set; }
+        
 
         public void Depositar(decimal valor)
         {
@@ -58,10 +56,9 @@ namespace Atividade1
 
         public decimal Saldo { get; set; }
 
-        public string Titular
-        {
-            get { return titular; }
-            set { titular = value; }
-        }
+        public string Titular { get; set; }
+
+        public int AgenciaId { get; set; }
+
     }
 }

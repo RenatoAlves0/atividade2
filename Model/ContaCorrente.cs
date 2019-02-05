@@ -8,8 +8,10 @@ namespace Atividade1
     public class ContaCorrente
     {
         public const decimal Taxa = 0.10M;
-        public string titular = string.Empty;
-        private int idContaCorrente;
+
+        
+        
+
         public ContaCorrente()
         {
 
@@ -17,15 +19,13 @@ namespace Atividade1
 
         public ContaCorrente(string t)
         {
-            this.titular = t;
+            Titular = t;
         }
 
+        public Agencia Agencia { get; set; }
+
         [Key]
-        public int Id
-        {
-            get {return idContaCorrente; }
-            set { idContaCorrente = value; }
-        }
+        public int Id { get; set; }
 
         public void Depositar(decimal valor)
         {
@@ -45,12 +45,11 @@ namespace Atividade1
 
         public decimal Saldo { get; set; }
 
-        public string Titular {
-            get {return titular; }
-            set { titular = value; }
-        }
+        public string Titular { get; set; }
+        
+        public int AgenciaId { get; set; }
 
-       
+
 
     }
 }

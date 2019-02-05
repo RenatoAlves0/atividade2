@@ -11,43 +11,43 @@ namespace Atividade1.Migrations
                 name: "Bancos",
                 columns: table => new
                 {
-                    IdBanco = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bancos", x => x.IdBanco);
+                    table.PrimaryKey("PK_Bancos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Clientes",
                 columns: table => new
                 {
-                    IdCliente = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clientes", x => x.IdCliente);
+                    table.PrimaryKey("PK_Clientes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Agencias",
                 columns: table => new
                 {
-                    IdAgencia = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    BancoIdBanco = table.Column<int>(nullable: true)
+                    BancoId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Agencias", x => x.IdAgencia);
+                    table.PrimaryKey("PK_Agencias", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Agencias_Bancos_BancoIdBanco",
-                        column: x => x.BancoIdBanco,
+                        name: "FK_Agencias_Bancos_BancoId",
+                        column: x => x.BancoId,
                         principalTable: "Bancos",
-                        principalColumn: "IdBanco",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -57,18 +57,18 @@ namespace Atividade1.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    AgenciaId = table.Column<int>(nullable: true),
                     Saldo = table.Column<decimal>(nullable: false),
-                    Titular = table.Column<string>(nullable: true),
-                    AgenciaIdAgencia = table.Column<int>(nullable: true)
+                    Titular = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ContasCorrentes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContasCorrentes_Agencias_AgenciaIdAgencia",
-                        column: x => x.AgenciaIdAgencia,
+                        name: "FK_ContasCorrentes_Agencias_AgenciaId",
+                        column: x => x.AgenciaId,
                         principalTable: "Agencias",
-                        principalColumn: "IdAgencia",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -82,16 +82,16 @@ namespace Atividade1.Migrations
                     DataAniversario = table.Column<DateTime>(nullable: false),
                     Saldo = table.Column<decimal>(nullable: false),
                     Titular = table.Column<string>(nullable: true),
-                    AgenciaIdAgencia = table.Column<int>(nullable: true)
+                    AgenciaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ContasPoupanca", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContasPoupanca_Agencias_AgenciaIdAgencia",
-                        column: x => x.AgenciaIdAgencia,
+                        name: "FK_ContasPoupanca_Agencias_AgenciaId",
+                        column: x => x.AgenciaId,
                         principalTable: "Agencias",
-                        principalColumn: "IdAgencia",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -99,40 +99,40 @@ namespace Atividade1.Migrations
                 name: "Solicitacoes",
                 columns: table => new
                 {
-                    IdSolicitacao = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    AgenciaIdAgencia = table.Column<int>(nullable: true)
+                    AgenciaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Solicitacoes", x => x.IdSolicitacao);
+                    table.PrimaryKey("PK_Solicitacoes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Solicitacoes_Agencias_AgenciaIdAgencia",
-                        column: x => x.AgenciaIdAgencia,
+                        name: "FK_Solicitacoes_Agencias_AgenciaId",
+                        column: x => x.AgenciaId,
                         principalTable: "Agencias",
-                        principalColumn: "IdAgencia",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Agencias_BancoIdBanco",
+                name: "IX_Agencias_BancoId",
                 table: "Agencias",
-                column: "BancoIdBanco");
+                column: "BancoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContasCorrentes_AgenciaIdAgencia",
+                name: "IX_ContasCorrentes_AgenciaId",
                 table: "ContasCorrentes",
-                column: "AgenciaIdAgencia");
+                column: "AgenciaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContasPoupanca_AgenciaIdAgencia",
+                name: "IX_ContasPoupanca_AgenciaId",
                 table: "ContasPoupanca",
-                column: "AgenciaIdAgencia");
+                column: "AgenciaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Solicitacoes_AgenciaIdAgencia",
+                name: "IX_Solicitacoes_AgenciaId",
                 table: "Solicitacoes",
-                column: "AgenciaIdAgencia");
+                column: "AgenciaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
